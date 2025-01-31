@@ -12,7 +12,8 @@ export async function GET(req: Request) {
     const lat = searchParams.get('lat');
     const lng = searchParams.get('lng');
     const range = searchParams.get('range');
-    
+    console.log('API呼び出し');
+
 
     const apiKey = API.HOTPEPPER_API;
     const apiUrl = `https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${apiKey}&lat=${lat}&lng=${lng}&range=${range}&format=json`;
