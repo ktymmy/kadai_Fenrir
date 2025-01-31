@@ -1,10 +1,11 @@
-// app/search/types.ts
-type responseRestaurant = {
-    id: string;
+type ShopType = {
     name: string;
+    id: string;
     address: string;
     genre?: string;
     midnight: string;
     logo_image: string;
 };
-export default responseRestaurant;
+
+
+export default ShopType;

@@ -1,3 +1,5 @@
+// TODO:style完成させる
+
 'use client'
 
 export default function Error({
