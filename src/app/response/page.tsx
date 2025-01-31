@@ -27,7 +27,7 @@ const RestaurantSearch = () => {
     const [nameAnyText, setNameAnyText] = useState<string>(name_any);
     const handleNameAnyInput = (e: React.ChangeEvent<HTMLInputElement>) => setNameAnyText(e.target.value);
 
-    //位置情報取得
+    // 位置情報取得
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -44,11 +44,11 @@ const RestaurantSearch = () => {
         }
     }, []);
 
-    //fetch
+    // fetch
     const fetchRestaurants = async () => {
         setLoading(true);
         setError(null);
-    
+
         try {
             const queryParams = new URLSearchParams({
                 lat: location.latitude.toString(),
@@ -58,23 +58,21 @@ const RestaurantSearch = () => {
                 name_any: encodeURIComponent(nameAnyText.trim()),
                 count: COUNT.toString(),
             });
-    
+
             console.log('検索', queryParams.toString());
             console.log('fetch開始');
-    
+
             const response = await fetch(`/api/hotpepper/?${queryParams.toString()}`);
             if (!response.ok) throw new Error('データ取得に失敗');
-    
+
             const data = await response.json();
-    
-            // データ構造の確認
             const res = data.results;
-    
+
             if (res?.shop?.length) {
-                setRestaurants(res.shop); // データを正しく設定
+                setRestaurants(res.shop); 
                 console.log('返された件数:', res.results_available);
                 console.log('返された店:', res.shop[1]?.name || 'データなし');
-                
+
                 router.push('/result');
                 console.log('resultにpushしました');
             } else {
@@ -87,7 +85,6 @@ const RestaurantSearch = () => {
             setLoading(false);
         }
     };
-    
 
     return (
         <div className="p-5">
