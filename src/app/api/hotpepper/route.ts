@@ -9,16 +9,15 @@ import API from '@/api';
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
-    console.log('APIリクエスト'+req.url)
-
     const lat = searchParams.get('lat');
     const lng = searchParams.get('lng');
     const range = searchParams.get('range');
+    
 
     const apiKey = API.HOTPEPPER_API;
     const apiUrl = `https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${apiKey}&lat=${lat}&lng=${lng}&range=${range}&format=json`;
 
-    try {
+        try {
         const response = await fetch(apiUrl);
         console.log('fetch完了')
 
@@ -27,6 +26,8 @@ export async function GET(req: Request) {
         }
 
         const data = await response.json();
+        console.log('検索URL',apiUrl)
+
 
         return NextResponse.json(data, {
             status: 200,

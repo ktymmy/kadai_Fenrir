@@ -7,7 +7,7 @@ export default function Home() {
 
   const router = useRouter();
   const toSearch = () => {
-    router.push('/search');
+    router.push('/response');
   }
 
   

@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useContext, useState, ReactNode } from 'react';
-import responseRestaurant from '../search/shopTypes'
+import responseRestaurant from '../response/shopTypes'
 
 type RestaurantContextType = {
     restaurants: responseRestaurant[];
@@ -11,6 +11,8 @@ const RestaurantContext = createContext<RestaurantContextType | undefined>(undef
 
 export const RestaurantProvider = ({ children }: { children: ReactNode }) => {
     const [restaurants, setRestaurants] = useState<responseRestaurant[]>([]);
+    console.log('レストラン一覧:', JSON.stringify(restaurants));
+
     return (
         <RestaurantContext.Provider value={{ restaurants, setRestaurants }}>
             {children}
