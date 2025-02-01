@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRestaurantContext } from '../context/RestaurantContext';
 
@@ -9,25 +9,24 @@ const INITIAL_LONGITUDE = 0;
 const INITIAL_RADIUS = 1;  
 const COUNT = 100;
 
-const RestaurantSearch = () => {
+const SearchComponent = () => {
     const router = useRouter();
     const { setRestaurants } = useRestaurantContext();
+    const searchParams = useSearchParams();
+    
+    const keyword = searchParams?.get('keyword') || '';
+    const name_any = searchParams?.get('name_any') || '';
+
     const [location, setLocation] = useState({ latitude: INITIAL_LATITUDE, longitude: INITIAL_LONGITUDE });
     const [radius, setRadius] = useState(INITIAL_RADIUS);
+    const [keywordText, setKeywordText] = useState<string>(keyword);
+    const [nameAnyText, setNameAnyText] = useState<string>(name_any);
     const [loading, setLoading] = useState(false);
     const [, setError] = useState<string | null>(null);
 
-    const searchParams = useSearchParams();
-    const keyword = searchParams.get('keyword') || '';
-    const [keywordText, setKeywordText] = useState<string>(keyword);
-
     const handleKeywordInput = (e: React.ChangeEvent<HTMLInputElement>) => setKeywordText(e.target.value);
-
-    const name_any = searchParams.get('name_any') || '';
-    const [nameAnyText, setNameAnyText] = useState<string>(name_any);
     const handleNameAnyInput = (e: React.ChangeEvent<HTMLInputElement>) => setNameAnyText(e.target.value);
 
-    // 位置情報取得
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -44,7 +43,6 @@ const RestaurantSearch = () => {
         }
     }, []);
 
-    // fetch
     const fetchRestaurants = async () => {
         setLoading(true);
         setError(null);
@@ -59,9 +57,6 @@ const RestaurantSearch = () => {
                 count: COUNT.toString(),
             });
 
-            console.log('検索', queryParams.toString());
-            console.log('fetch開始');
-
             const response = await fetch(`/api/hotpepper/?${queryParams.toString()}`);
             if (!response.ok) throw new Error('データ取得に失敗');
 
@@ -69,12 +64,8 @@ const RestaurantSearch = () => {
             const res = data.results;
 
             if (res?.shop?.length) {
-                setRestaurants(res.shop); 
-                console.log('返された件数:', res.results_available);
-                console.log('返された店:', res.shop[1]?.name || 'データなし');
-
+                setRestaurants(res.shop);
                 router.push('/result');
-                console.log('resultにpushしました');
             } else {
                 setError('レストランが見つかりませんでした。');
             }
@@ -90,7 +81,6 @@ const RestaurantSearch = () => {
         <div className="p-5">
             <h1 className="text-xl font-bold mb-4">レストラン検索</h1>
 
-            {/* 検索半径 */}
             <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">検索半径 (メートル)</label>
                 <select
@@ -107,7 +97,6 @@ const RestaurantSearch = () => {
                 </select>
             </div>
 
-            {/* キーワード */}
             <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">キーワード検索</label>
                 <input
@@ -119,7 +108,6 @@ const RestaurantSearch = () => {
                 />
             </div>
 
-            {/* 店舗名検索 */}
             <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">店舗名検索</label>
                 <input
@@ -131,14 +119,12 @@ const RestaurantSearch = () => {
                 />
             </div>
 
-            {/* 現在地の表示 */}
             <div className="mb-4">
                 <h2 className="text-sm font-medium">現在地情報</h2>
                 <p>緯度: {location.latitude}</p>
                 <p>経度: {location.longitude}</p>
             </div>
 
-            {/* 検索ボタン */}
             <button
                 onClick={fetchRestaurants}
                 className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
@@ -146,10 +132,15 @@ const RestaurantSearch = () => {
                 検索
             </button>
 
-            {/* ローディング中の表示 */}
             {loading && <p className="mt-4 text-blue-500">ロード中</p>}
         </div>
     );
 };
+
+const RestaurantSearch = () => (
+    <Suspense fallback={<p>ロード中</p>}>
+        <SearchComponent />
+    </Suspense>
+);
 
 export default RestaurantSearch;

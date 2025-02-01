@@ -11,7 +11,8 @@ const RestaurantContext = createContext<RestaurantContextType | undefined>(undef
 
 export const RestaurantProvider = ({ children }: { children: ReactNode }) => {
     const [restaurants, setRestaurants] = useState<responseRestaurant[]>([]);
-    console.log('レストラン一覧:', JSON.stringify(restaurants));
+    console.log('レストラン一覧:', restaurants);
+
 
     return (
         <RestaurantContext.Provider value={{ restaurants, setRestaurants }}>
