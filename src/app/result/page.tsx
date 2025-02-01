@@ -7,7 +7,7 @@ import { useState } from 'react';
 const ResultsPage = () => {
     const { restaurants } = useRestaurantContext();
     const [currentPage, setCurrentPage] = useState(1);
-    const ITEMS_PER_PAGE = 10; 
+    const ITEMS_PER_PAGE = 5; 
 
     const totalPages = Math.ceil(restaurants.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -31,6 +31,8 @@ const ResultsPage = () => {
                         <li key={shop.id} className="border-b py-2">
                             <h2 className="text-lg font-bold">{shop.name}</h2>
                             <p className="text-sm text-gray-500">{shop.address}</p>
+                            <img src={shop.logo_image} alt={shop.name} width={100} />
+
                         </li>
                     ))
                 ) : (
