@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useRestaurantContext } from '../context/RestaurantContext';
 
@@ -137,10 +137,4 @@ const SearchComponent = () => {
     );
 };
 
-const RestaurantSearch = () => (
-    <Suspense fallback={<p>ロード中</p>}>
-        <SearchComponent />
-    </Suspense>
-);
-
-export default RestaurantSearch;
+export default SearchComponent;
