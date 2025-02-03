@@ -3,8 +3,12 @@
 'use client';
 import { useRestaurantContext } from '../context/RestaurantContext';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 
 const ResultsPage = () => {
+    const router = useRouter();
+
     const { restaurants } = useRestaurantContext();
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 5; 
@@ -22,16 +26,27 @@ const ResultsPage = () => {
         if (currentPage > 1) setCurrentPage(currentPage - 1);
     };
 
+    const handleClick = (id: string) => {
+        router.push(`/result/${id}`);
+    };
+
     return (
         <div className="p-4">
             <h1 className="text-xl font-bold mb-4">レストラン情報</h1>
             <ul className="space-y-4">
                 {currentRestaurants.length > 0 ? (
                     currentRestaurants.map((shop) => (
-                        <li key={shop.id} className="border-b py-2">
+                        <li key={shop.id} onClick={() => handleClick(shop.id)}className="border-b py-2">
                             <h2 className="text-lg font-bold">{shop.name}</h2>
                             <p className="text-sm text-gray-500">{shop.address}</p>
+                            <p className="text-sm text-gray-500">{shop.access}</p>
+                            <p className="text-sm text-gray-500">{shop.genre.name}</p>
+
+
                             <img src={shop.logo_image} alt={shop.name} width={100} />
+                            <img src={shop.photo.pc.l} alt={shop.name} width={100} />
+
+
 
                         </li>
                     ))

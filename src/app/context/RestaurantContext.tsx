@@ -1,6 +1,6 @@
 'use client';
-import { createContext, useContext, useState, ReactNode } from 'react';
-import responseRestaurant from '../response/shopTypes'
+import { createContext, useContext, useState, ReactNode,useEffect } from 'react';
+import responseRestaurant from '../result/shopTypes'
 
 type RestaurantContextType = {
     restaurants: responseRestaurant[];
@@ -11,7 +11,14 @@ const RestaurantContext = createContext<RestaurantContextType | undefined>(undef
 
 export const RestaurantProvider = ({ children }: { children: ReactNode }) => {
     const [restaurants, setRestaurants] = useState<responseRestaurant[]>([]);
-    console.log('レストラン一覧:', restaurants);
+    
+    useEffect(() => {
+        if (restaurants.length === 0) {
+            console.log('データ無し');
+        } else {
+            console.log('レストラン一覧:', restaurants);
+        }
+    }, [restaurants])
 
 
     return (
