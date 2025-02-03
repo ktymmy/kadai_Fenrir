@@ -33,10 +33,9 @@ Typescript(Next.js)
 
 
 ### 開発環境構築手順(ウェブアプリ)
-コマンドプロンプト
-ディレクトリにて
-#-npm install next@latest
-#-npm install @types/next
+(コマンドプロンプト/ディレクトリにて)
+- npm install next@latest
+- npm install @types/next
 
 ## 動作対象端末・OS
 ### 動作対象OS
