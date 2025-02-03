@@ -39,7 +39,8 @@ Typescript(Next.js)
 
 ## 動作対象端末・OS
 ### 動作対象OS
-iOS 13.2.3
+windows
+ios
 
 ## 開発期間
 2週間
