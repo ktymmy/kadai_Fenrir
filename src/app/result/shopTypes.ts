@@ -12,6 +12,7 @@ type shopType = {
         pc:{
             l :string;
         }
-    }
+    };
+    open:string;
 };
 export default shopType;
