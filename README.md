@@ -1,37 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 簡易仕様書サンプル
 
-## Getting Started
+### 作者
+片山 美結
+### アプリ名
+ぱくぱく
 
-First, run the development server:
+#### コンセプト
+現在地から近くのお店がすぐに見つかる。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### こだわったポイント
+女性向けのアプリにしてみたいと思い作成しました。
+検索条件に女子会などでお店が見つかりやすいようにしました。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 公開したアプリの URL（Store にリリースしている場合）
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 該当プロジェクトのリポジトリ URL（GitHub,GitLab など Git ホスティングサービスを利用されている場合）
+https://github.com/ktymmy/kadai_Fenrir.git
 
-## Learn More
+## 開発環境
+### 開発環境
+Node.js 20.9.0
+npm 10.1.0
+Next.js @15.1.6
+Typescript　5.7.3
 
-To learn more about Next.js, take a look at the following resources:
+### 開発言語
+Typescript(Next.js)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### テーブル定義(ER図)などの設計ドキュメント（ウェブアプリ）
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### 開発環境構築手順(ウェブアプリ)
+コマンドプロンプト
+ディレクトリにて
+-npm install next@latest
+-npm install @types/next
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 動作対象端末・OS
+### 動作対象OS
+iOS 13.2.3
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# kadai_Fenrir
+## 開発期間
+2週間
+
+## アプリケーション機能
+
+### 機能一覧
+- レストラン検索：ホットペッパーグルメサーチAPIを使用して現在地周辺の飲食店を検索する。【設定した検索条件：現在地からの検索半径・店舗名・キーワード・個室ありなし】
+- レストラン情報取得：ホットペッパーグルメサーチAPIを使用して、飲食店の詳細情報を取得する。
+
+### 画面一覧
+- 検索画面 ：条件を指定してレストランを検索する。
+- 一覧画面 ：検索結果の飲食店を一覧表示する。
+- 店舗詳細画面:選択した店舗の詳細な情報を表示する。
+
+### 使用しているAPI,SDK,ライブラリなど
+- ホットペッパーグルメサーチAPI
+
+### 技術面でアドバイスして欲しいポイント
+ディレクトリ構造に悩んでいます。今回のような規模の開発において、どのようなアーキテクチャ設計が適切か教えていただきたいです。
+また、レンダリングの最適化を目指しているため、コードのパフォーマンス向上に関してアドバイスをいただけると幸いです。
