@@ -10,6 +10,7 @@ export async function GET(req: Request) {
     const range = searchParams.get('range');
     const keyword = searchParams.get('keyword');
     const name_any = searchParams.get('name_any');
+    const privateRoom = searchParams.get('private_room');
 
     const params = new URLSearchParams({
         lat: lat || '',
@@ -17,8 +18,10 @@ export async function GET(req: Request) {
         range: range || '',
         keyword: keyword || '',
         name_any: name_any || '',
-        count: '50',
+        count: '100',
         format: 'json',
+        private_room: privateRoom ? '1' : '0', 
+
       });      
     
       //位置情報が取得できているか
