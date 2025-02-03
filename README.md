@@ -32,7 +32,12 @@ Typescript(Next.js)
 ### テーブル定義(ER図)などの設計ドキュメント（ウェブアプリ）
 
 
+
 ### 開発環境構築手順(ウェブアプリ)
+kadai_Fenrir-developファイルの直下に【.env.local】ファイルを作成し、
+- NEXT_PUBLIC_HOTPEPPER_API_KEY = APIキー
+を設定する
+
 (コマンドプロンプト/ディレクトリにて)
 - npm install next@latest
 - npm install @types/next
